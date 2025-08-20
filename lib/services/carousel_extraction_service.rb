@@ -74,8 +74,8 @@ class CarouselExtractionService
     img = item.at_css('img') || item.parent.at_css('img')
     return unless img
 
-    img_src = img['src'] || img['data-src']
-    return unless img_src
+    return img['data-src'] unless img['data-src'].nil?
+    return if (img_src = img['src']).nil?
 
     # Check if this is a deferred image that needs script lookup
     return find_image_from_script(img['id']) if img['data-deferred'] == '1'
