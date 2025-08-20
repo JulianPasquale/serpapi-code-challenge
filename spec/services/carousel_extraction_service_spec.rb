@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require_relative '../../lib/services/generic_content_extraction_service'
+require_relative '../../lib/services/carousel_extraction_service'
 
-RSpec.describe GenericContentExtractionService do
-  let(:subject) { described_class.new(html_content) }
+RSpec.describe CarouselExtractionService do
+  let(:subject) { described_class.new(html_content: html_content) }
 
   describe '#extract_carousel' do
     let(:carousel) { subject.extract_carousel }
@@ -50,8 +50,7 @@ RSpec.describe GenericContentExtractionService do
     end
 
     context 'with unparseable HTML' do
-      let(:service) { described_class.new('<html><body>No carousel here</body></html>') }
-      let(:carousel) { service.extract_carousel }
+      let(:html_content) { '<html><body>No carousel here</body></html>' }
 
       it 'returns an empty carousel' do
         expect(carousel).to be_a(DTOs::Carousel)

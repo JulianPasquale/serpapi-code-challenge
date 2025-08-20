@@ -4,25 +4,35 @@ require_relative '../search_documents/google'
 require_relative '../dtos/carousel'
 require_relative '../dtos/item'
 
-class GenericContentExtractionService
-  def initialize(html_content)
+class CarouselExtractionService
+  def initialize(html_content:, engine: 'google')
     @html_content = html_content
-    @document = SearchDocuments::Google.parse(html_content)
+    @engine = engine
   end
 
   def extract_carousel
-    return empty_carousel unless @document.parseable?
+    return empty_carousel unless document.parseable?
 
     DTOs::Carousel.new(
-      title: @document.carousel_elements_name,
+      title: document.carousel_elements_name,
       items: extract_items_from_carousel
     )
   end
 
   private
 
+  def document
+    @document ||=
+      case @engine
+      when 'google'
+        SearchDocuments::Google.parse(@html_content)
+      else
+        raise 'Engine not supported'
+      end
+  end
+
   def extract_items_from_carousel
-    nodes = @document.items_nodes
+    nodes = document.items_nodes
     return [] if nodes.empty?
 
     nodes.filter_map(&method(:item_to_dto))
@@ -76,7 +86,7 @@ class GenericContentExtractionService
   def find_image_from_script(img_id)
     return nil if img_id.nil? || img_id.empty?
 
-    @document.css('script').each do |script|
+    document.css('script').each do |script|
       content = script.content.to_s
 
       # Look for pattern: var ii = ['image_id']; _setImagesSrc(ii, s);

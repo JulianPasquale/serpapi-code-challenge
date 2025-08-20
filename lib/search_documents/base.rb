@@ -8,7 +8,7 @@ module SearchDocuments
       raise NotImplementedError, 'Subclasses must implement this method'
     end
 
-    def carousel_container
+    def items_nodes
       raise NotImplementedError, 'Subclasses must implement this method'
     end
   end
