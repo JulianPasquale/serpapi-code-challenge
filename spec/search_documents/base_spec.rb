@@ -8,7 +8,9 @@ RSpec.describe SearchDocuments::Base do
 
   describe '#carousel_elements_name' do
     it 'raises NotImplementedError' do
-      expect { subject.carousel_elements_name }.to raise_error(NotImplementedError, 'Subclasses must implement this method')
+      expect do
+        subject.carousel_elements_name
+      end.to raise_error(NotImplementedError, 'Subclasses must implement this method')
     end
   end
 

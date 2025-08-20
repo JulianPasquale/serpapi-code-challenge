@@ -5,7 +5,7 @@ require_relative '../../lib/dtos/item'
 
 RSpec.describe DTOs::Item do
   let(:name) { 'Test Item' }
-  let(:extensions) { ['extension1', 'extension2'] }
+  let(:extensions) { %w[extension1 extension2] }
   let(:link) { 'http://example.com/test' }
   let(:image) { 'http://example.com/image.jpg' }
 

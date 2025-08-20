@@ -11,7 +11,7 @@ RSpec.describe DTOs::Carousel do
   describe '#items_count' do
     context 'with no items' do
       subject { described_class.new(title: 'Test', items: []) }
-      
+
       it 'returns 0' do
         expect(subject.items_count).to eq(0)
       end
@@ -19,7 +19,7 @@ RSpec.describe DTOs::Carousel do
 
     context 'with multiple items' do
       subject { described_class.new(title: 'Test', items: [item1, item2, item3]) }
-      
+
       it 'returns the correct count' do
         expect(subject.items_count).to eq(3)
       end
@@ -27,7 +27,7 @@ RSpec.describe DTOs::Carousel do
 
     context 'with nil items filtered out' do
       subject { described_class.new(title: 'Test', items: [item1, nil, item2, nil, item3]) }
-      
+
       it 'returns count without nils' do
         expect(subject.items_count).to eq(3)
       end
@@ -37,7 +37,7 @@ RSpec.describe DTOs::Carousel do
   describe '#empty?' do
     context 'with no items' do
       subject { described_class.new(title: 'Test', items: []) }
-      
+
       it 'returns true' do
         expect(subject.empty?).to be true
       end
@@ -45,7 +45,7 @@ RSpec.describe DTOs::Carousel do
 
     context 'with items' do
       subject { described_class.new(title: 'Test', items: [item1]) }
-      
+
       it 'returns false' do
         expect(subject.empty?).to be false
       end
@@ -53,7 +53,7 @@ RSpec.describe DTOs::Carousel do
 
     context 'with only nil items' do
       subject { described_class.new(title: 'Test', items: [nil, nil]) }
-      
+
       it 'returns true after filtering nils' do
         expect(subject.empty?).to be true
       end
