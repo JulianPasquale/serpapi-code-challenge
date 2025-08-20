@@ -5,12 +5,12 @@ require_relative 'base'
 module SearchDocuments
   class Google < Base
     def parseable?
-      !css('[data-attrid^="kc:"]').empty?
+      !kc_node.nil?
     end
 
     # Return text like "Artworks" or "Music" or whatever the carousel contains
     def carousel_elements_name
-      container = kc_nodes.first
+      container = kc_node
       while container
         # Look for heading elements within this container
         if (heading = container.at_css('[aria-level="2"][role="heading"]'))
@@ -23,24 +23,14 @@ module SearchDocuments
       end
     end
 
-    # Return a Nokogiri fragment with the specific portion of the document that contains the carousel
-    def carousel_container
-      # Look for carousel container using Google's data-attrid taxonomy pattern
-      # This ensures we select only knowledge card type carousels with images and search links
-      kc_nodes.each do |node|
-        # Verify this container has both images and search links (avoid ads)
-        has_search_links = !node.css('a[href*="search?"]').empty?
-
-        return node if has_search_links
-      end
-
-      nil
+    def items_nodes
+      @items_nodes ||= kc_node.css('a[href*="search?"]')
     end
 
     private
 
-    def kc_nodes
-      @kc_nodes ||= css('[data-attrid^="kc:"]')
+    def kc_node
+      @kc_node ||= at_css('[data-attrid^="kc:"]')
     end
   end
 end

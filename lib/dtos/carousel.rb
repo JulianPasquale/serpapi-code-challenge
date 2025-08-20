@@ -1,34 +1,22 @@
 # frozen_string_literal: true
 
-require_relative 'tile'
+require_relative 'item'
 
 module DTOs
   class Carousel
-    attr_reader :tiles, :metadata
+    attr_reader :title, :items
 
-    def initialize(tiles:, metadata: {})
-      @tiles = Array(tiles).compact
-      @metadata = metadata || {}
+    def initialize(title: '', items: [])
+      @title = title
+      @items = items.compact
     end
 
-    def tiles_count
-      tiles.length
-    end
-
-    def tiles_with_images
-      tiles.select(&:has_images?)
-    end
-
-    def tiles_with_metadata
-      tiles.select(&:has_metadata?)
+    def items_count
+      items.length
     end
 
     def empty?
-      tiles.empty?
-    end
-
-    def content_types
-      tiles.map(&:content_type).compact.uniq
+      items.empty?
     end
   end
 end
