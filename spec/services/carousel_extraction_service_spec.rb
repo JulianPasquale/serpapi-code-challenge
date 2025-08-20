@@ -30,7 +30,7 @@ RSpec.describe CarouselExtractionService do
     end
 
     context 'with Beatles albums HTML' do
-      let(:html_content) { File.read('spec/fixtures/the-beathes.html') }
+      let(:html_content) { File.read('spec/fixtures/the-beatles.html') }
 
       it 'returns a Carousel DTO' do
         expect(carousel).to be_a(DTOs::Carousel)

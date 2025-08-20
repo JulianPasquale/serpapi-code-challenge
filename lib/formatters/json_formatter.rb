@@ -8,7 +8,7 @@ module Formatters
     def parse(carousel)
       JSON.pretty_generate(
         {
-          carousel.title => carousel.items.map(&method(:format_item))
+          carousel.title.downcase => carousel.items.map(&method(:format_item))
         }
       )
     end

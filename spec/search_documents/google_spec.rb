@@ -15,7 +15,7 @@ RSpec.describe SearchDocuments::Google do
     end
 
     context 'with The Beatles HTML' do
-      let(:html_content) { File.read('spec/fixtures/the-beathes.html') }
+      let(:html_content) { File.read('spec/fixtures/the-beatles.html') }
 
       it 'returns "Albums"' do
         expect(subject.carousel_elements_name).to eq('Albums')
@@ -41,7 +41,7 @@ RSpec.describe SearchDocuments::Google do
     end
 
     context 'with The Beatles HTML' do
-      let(:html_content) { File.read('spec/fixtures/the-beathes.html') }
+      let(:html_content) { File.read('spec/fixtures/the-beatles.html') }
 
       it 'returns carousel items nodes' do
         items = subject.items_nodes

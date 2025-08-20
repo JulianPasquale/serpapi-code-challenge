@@ -22,16 +22,16 @@ RSpec.describe Formatters::JsonFormatter do
       end
 
       it 'uses carousel title as root key' do
-        expect(parsed_result).to have_key('Test Carousel')
+        expect(parsed_result).to have_key('test carousel')
       end
 
       it 'includes all items' do
-        items = parsed_result['Test Carousel']
+        items = parsed_result['test carousel']
         expect(items.length).to eq(2)
       end
 
       it 'formats items correctly' do
-        items = parsed_result['Test Carousel']
+        items = parsed_result['test carousel']
 
         expect(items[0]).to eq({
                                  'name' => 'Item 1',
@@ -55,7 +55,7 @@ RSpec.describe Formatters::JsonFormatter do
       let(:parsed_result) { JSON.parse(result) }
 
       it 'returns valid JSON with empty array' do
-        expect(parsed_result).to eq({ 'Empty' => [] })
+        expect(parsed_result).to eq({ 'empty' => [] })
       end
     end
   end

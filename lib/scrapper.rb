@@ -22,7 +22,7 @@ class Scrapper
     @formatter ||=
       case @format
       when 'json'
-        Formatters::JsonFormatter
+        Formatters::JsonFormatter.new
       else
         raise 'Format not supported'
       end
